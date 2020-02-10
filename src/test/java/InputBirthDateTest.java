@@ -19,7 +19,7 @@ public class InputBirthDateTest {
 
     @Before
     public void start() throws IOException, ParseException {
-        myChrDriPath = (new File("chromedriver_win32\\chromedriver.exe").getAbsolutePath());
+        myChrDriPath = (new File("src\\main\\resources\\chromedriver_win32\\chromedriver.exe").getAbsolutePath());
         System.setProperty("webdriver.chrome.driver", myChrDriPath);
         driver = new ChromeDriver();
         driver.manage().window().maximize();

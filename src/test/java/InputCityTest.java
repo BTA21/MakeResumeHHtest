@@ -18,7 +18,7 @@ public class InputCityTest {
 
     @Before
     public void start() throws IOException, ParseException {
-        myChrDriPath = (new File("chromedriver_win32\\chromedriver.exe").getAbsolutePath());
+        myChrDriPath = (new File("src\\main\\resources\\chromedriver_win32\\chromedriver.exe").getAbsolutePath());
         System.setProperty("webdriver.chrome.driver", myChrDriPath);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -41,7 +41,7 @@ public class InputCityTest {
 
     @Test
     public void typeCityTest1() throws IOException, ParseException {
-        makeResumeNow.doIt("Азамат", "Набиев", "Test", 21, "09", 1996, "Мужской", "Нет опыта работы");
+        makeResumeNow.doIt("Иван", "Иванов", "Test", 21, "09", 1996, "Мужской", "Нет опыта работы");
         makeResumeNow.submitPushResume();
         waitTime(timeForPause);
         Boolean actual = driver.findElements(By.xpath("//div[@class='bloko-column" +
@@ -56,7 +56,7 @@ public class InputCityTest {
 
     @Test
     public void typeCityTest2() throws IOException, ParseException {
-        makeResumeNow.doIt("Азамат", "Набиев", "", 21, "09", 1996, "Мужской", "Нет опыта работы");
+        makeResumeNow.doIt("Иван", "Иванов", "", 21, "09", 1996, "Мужской", "Нет опыта работы");
         makeResumeNow.submitPushResume();
         waitTime(timeForPause);
         Boolean actual = driver.findElements(By.xpath("//div[@class='bloko-column" +

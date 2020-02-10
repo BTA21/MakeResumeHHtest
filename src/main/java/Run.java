@@ -11,7 +11,7 @@ public class Run {
     private static String myChrDriPath;
 
     public static void main(String[] args) throws IOException, FileNotFoundException, ParseException {
-        myChrDriPath = (new File("chromedriver_win32\\chromedriver.exe").getAbsolutePath());
+        myChrDriPath = (new File("src\\main\\resources\\chromedriver_win32\\chromedriver.exe").getAbsolutePath());
         System.setProperty("webdriver.chrome.driver", myChrDriPath);
         // Создаем экземпляр WebDriver
         WebDriver driver = new ChromeDriver();

@@ -18,7 +18,7 @@ public class MakeResumeTest {
 
     @Before
     public void start() throws IOException, ParseException {
-        myChrDriPath = (new File("chromedriver_win32\\chromedriver.exe").getAbsolutePath());
+        myChrDriPath = (new File("src\\main\\resources\\chromedriver_win32\\chromedriver.exe").getAbsolutePath());
         System.setProperty("webdriver.chrome.driver", myChrDriPath);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -41,7 +41,7 @@ public class MakeResumeTest {
 
     @Test
     public void typePerfectDataTest() throws IOException, ParseException {
-        makeResumeNow.doIt("Азамат", "Набиев", "Уфа", 21, "09", 1996, "Мужской", "Нет опыта работы");
+        makeResumeNow.doIt("Иван", "Иванов", "Омск", 21, "09", 1996, "Мужской", "Нет опыта работы");
         makeResumeNow.submitPushResume();
         waitTime(timeForPause);
         Boolean actual = driver.findElements(By.xpath("//div [@class='bloko-form-error bloko-form-error_entered' and text()= 'Обязательное поле']")).size() > 0;

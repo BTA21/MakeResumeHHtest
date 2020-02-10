@@ -18,7 +18,7 @@ public class InputFirstNameTest {
 
     @Before
     public void start() throws IOException, ParseException {
-        myChrDriPath = (new File("chromedriver_win32\\chromedriver.exe").getAbsolutePath());
+        myChrDriPath = (new File("src\\main\\resources\\chromedriver_win32\\chromedriver.exe").getAbsolutePath());
         System.setProperty("webdriver.chrome.driver", myChrDriPath);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -42,7 +42,7 @@ public class InputFirstNameTest {
 
     @Test
     public void typeNameTest1() throws IOException, ParseException {
-        makeResumeNow.doIt("1Тест", "Набиев", "Уфа", 21, "09", 1996, "Мужской", "Нет опыта работы");
+        makeResumeNow.doIt("1Тест", "Иванов", "Омск", 21, "09", 1996, "Мужской", "Нет опыта работы");
         waitTime(timeForPause);
         Boolean actual = driver.findElements(By.xpath("//div[@class='bloko-control-group__vertical-item' and" +
                 " .//input[@placeholder='Имя']]//div[@class='bloko-form-error " +
@@ -53,7 +53,7 @@ public class InputFirstNameTest {
 
     @Test
     public void typeNameTest2() throws IOException, ParseException {
-        makeResumeNow.doIt("Тест-", "Набиев", "Уфа", 21, "09", 1996, "Мужской", "Нет опыта работы");
+        makeResumeNow.doIt("Тест-", "Иванов", "Омск", 21, "09", 1996, "Мужской", "Нет опыта работы");
         waitTime(timeForPause);
         Boolean actual = driver.findElements(By.xpath("//div[@class='bloko-control-group__vertical-item' and" +
                 " .//input[@placeholder='Имя']]//div[@class='bloko-form-error " +
@@ -64,7 +64,7 @@ public class InputFirstNameTest {
 
     @Test
     public void typeNameTest3() throws IOException, ParseException {
-        makeResumeNow.doIt("Test-Test", "Набиев", "Уфа", 21, "09", 1996, "Мужской", "Нет опыта работы");
+        makeResumeNow.doIt("Test-Test", "Иванов", "Омск", 21, "09", 1996, "Мужской", "Нет опыта работы");
         waitTime(timeForPause);
         Boolean actual = driver.findElements(By.xpath("//div[@class='bloko-control-group__vertical-item' and" +
                 " .//input[@placeholder='Имя']]//div[@class='bloko-form-error " +
@@ -75,7 +75,7 @@ public class InputFirstNameTest {
 
     @Test
     public void typeNameTest4() throws IOException, ParseException {
-        makeResumeNow.doIt("", "Набиев", "Уфа", 21, "09", 1996, "Мужской", "Нет опыта работы");
+        makeResumeNow.doIt("", "Иванов", "Омск", 21, "09", 1996, "Мужской", "Нет опыта работы");
         makeResumeNow.submitPushResume();
         waitTime(timeForPause);
         Boolean actual = driver.findElements(By.xpath("//div[@class='bloko-control-group__vertical-item' and" +

@@ -18,7 +18,7 @@ public class InputJobExpTest {
 
     @Before
     public void start() throws IOException, ParseException {
-        myChrDriPath = (new File("chromedriver_win32\\chromedriver.exe").getAbsolutePath());
+        myChrDriPath = (new File("src\\main\\resources\\chromedriver_win32\\chromedriver.exe").getAbsolutePath());
         System.setProperty("webdriver.chrome.driver", myChrDriPath);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -41,7 +41,7 @@ public class InputJobExpTest {
 
     @Test
     public void chooseJobExperienceTest1()  throws IOException, ParseException {
-        makeResumeNow.doIt("Азамат", "Набиев", "Уфа", 21, "09", 1996, "Мужской");
+        makeResumeNow.doIt("Иван", "Иванов", "Омск", 21, "09", 1996, "Мужской");
         makeResumeNow.submitPushResume();
         waitTime(timeForPause);
         Boolean actual = driver.findElements(By.xpath("//div[@class='bloko-column bloko-column_xs-0 bloko-column_s-8" +

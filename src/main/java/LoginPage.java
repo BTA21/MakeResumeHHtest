@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class LoginPage {
     By usernameLocator = By.name("username");
     By passwordLocator = By.name("password");
-    By loginButtonLocator = By.xpath("/html/body/div[2]/div/div[2]/div/div/form/div[4]/input");
+    By loginButtonLocator = By.xpath("//input[@value='Войти в личный кабинет']");
     private WebDriver driver;
     private JSONObject jo;
     private Object obj;
@@ -39,7 +39,7 @@ public class LoginPage {
     }
 
     public LoginPage loginAs() throws IOException, ParseException{
-        myLogPassPath = (new File("src\\main\\java\\config.json").getAbsolutePath());
+        myLogPassPath = (new File("src\\main\\resources\\config.json").getAbsolutePath());
         System.setProperty("webdriver.chrome.driver", myLogPassPath);
         Object obj = new JSONParser().parse(new FileReader(myLogPassPath));
         JSONObject jo = (JSONObject) obj;
