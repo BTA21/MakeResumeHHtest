@@ -2,8 +2,6 @@ import org.json.simple.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import java.io.*;
-import org.json.simple.parser.*;
 import java.util.concurrent.TimeUnit;
 /**
  * Класс страницы создания резюме со свойствами <b>makeNewResumeLocator</b>, <b>firstNameHolderLocator</b>,
