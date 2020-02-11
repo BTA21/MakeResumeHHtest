@@ -2,7 +2,6 @@ import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 /**
  * Класс для работы.
