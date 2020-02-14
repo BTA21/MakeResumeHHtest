@@ -16,9 +16,7 @@ import java.io.IOException;
 
 /**
 * Класс для тестирования ввода фамилии при создании резюме со свойствами
-* <b>deleteResume</b>, <b>deleteResumeAccept</b>, <b>driver</b>,
-* <b>makeResumeNow</b>, <b>loginNow</b>,
-* <b>timeForPause</b> и <b>myChrDriPath</b>.
+* <b>driver</b>, <b>makeResumeNow</b>.
 * @author Набиев Азамат Ильдусович
 * @version 1.2
  */
@@ -39,6 +37,7 @@ public class InputLastNameTest1 {
     public void end() {
         try {
             driver.findElement(makeResumeNow.deleteResume).click();
+            makeResumeNow.waitTime(makeResumeNow.timeForPause);
             driver.findElement(makeResumeNow.deleteResumeAccept).click();
         } catch(NoSuchElementException e) {
 
@@ -47,7 +46,7 @@ public class InputLastNameTest1 {
     }
 
     @Step("Проверка сценария, где фамилия принимает значение '{LastName}'")
-    public void checkEmptyLNStep(String firstName, String LastName,
+    public void checkEmptyLNStep11(String firstName, String LastName,
                                  String city, Integer day, String month,
                                  Integer year, String sex, String jobExp,
                                  Boolean expected) {
@@ -63,6 +62,6 @@ public class InputLastNameTest1 {
     @Story(value = "Случаи с ожидаемой ошибкой")
     @Test
     public void checkEmptyLNTest() {
-        checkEmptyLNStep("Иван123", "", "Омск", 21, "09", 1996, "Мужской", "Нет опыта работы",true);
+        checkEmptyLNStep11("Иван123", "", "Омск", 21, "09", 1996, "Мужской", "Нет опыта работы",true);
     }
 }

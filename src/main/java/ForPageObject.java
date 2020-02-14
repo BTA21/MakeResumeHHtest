@@ -6,6 +6,7 @@ import org.json.simple.parser.JSONParser;
 import java.io.*;
 import org.json.simple.parser.*;
 import java.io.FileReader;
+import java.security.Key;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -17,6 +18,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.1
  */
 public class ForPageObject {
+
     /** Переменная объекта логина */
     By usernameLocator = By.name("username");
 
@@ -45,6 +47,9 @@ public class ForPageObject {
     /** Переменная списка выбора месяца рождения*/
     By birthMonthSelectorLocator = By.xpath("//span[text()='Месяц']");
 
+    /** Переменная пустого выбора месяца рождения*/
+    By noOption = By.xpath("//select[@data-qa='resume__birthday__month-select']//option[1]");
+
     /** Переменная поля ввода года рождения*/
     By birthYearHolderLocator = By.xpath("//input[@placeholder='Год']");
 
@@ -56,6 +61,12 @@ public class ForPageObject {
 
     /** Переменная объекта кнопки "Удалить" */
     By deleteResumeAccept = By.xpath("//button[text()='Удалить']");
+
+    /** Переменная ссылки на резюме "Начинающий специалист" */
+    By resumeForDelete = By.xpath("//a[@class='applicant-resumes-title']//span[text()='Начинающий специалист']");
+
+    /** Переменная ссылки на список резюме */
+    By resumesForDelete = By.xpath("//a[text()='Мои резюме']");
 
     /** Переменная сообщения ошибки "Обязательное поле" */
     By necessaryFieldErr = By.xpath("//div[@class='bloko-form-error " +
@@ -187,9 +198,10 @@ public class ForPageObject {
      */
     public ForPageObject typeFirstname(String firstName) {
         driver.findElement(firstNameHolderLocator).clear();
-        driver.findElement(firstNameHolderLocator).sendKeys(firstName);
+        driver.findElement(firstNameHolderLocator).sendKeys(firstName + Keys.TAB);
         return this;
     }
+
     /**
      * Функция ввода фамилии
      * @param lastName фамилия
@@ -197,9 +209,10 @@ public class ForPageObject {
      */
     public ForPageObject typeLastname(String lastName) {
         driver.findElement(lastNameHolderLocator).clear();
-        driver.findElement(lastNameHolderLocator).sendKeys(lastName);
+        driver.findElement(lastNameHolderLocator).sendKeys(lastName + Keys.TAB);
         return this;
     }
+
     /**
      * Функция ввода города
      * @param city город
@@ -210,6 +223,7 @@ public class ForPageObject {
         waitTime(3);
         return this;
     }
+
     /**
      * Функция ввода дня рождения
      * @param day день рождения
@@ -219,6 +233,7 @@ public class ForPageObject {
         driver.findElement(birthDayHolderLocator).sendKeys(day);
         return this;
     }
+
     /**
      * Функция выбора месяца рождения
      * @param month месяц рождения
@@ -227,21 +242,23 @@ public class ForPageObject {
     public ForPageObject typeBirthdayDateMonth(String month) {
         driver.findElement(birthMonthSelectorLocator).submit();
         if (month == "null") {
-            driver.findElement(By.xpath("//select[@data-qa='resume__birthday__month-select']//option[1]")).click();
+            driver.findElement(noOption).click();
         } else {
             driver.findElement(By.xpath("//option [@value='" + month + "']")).click();
         }
         return this;
     }
+
     /**
      * Функция ввода года рождения
      * @param year год рождения
      * @return возвращает страницу
      */
     public ForPageObject typeBirthdayDateYear(String year) {
-        driver.findElement(birthYearHolderLocator).sendKeys(year);
+        driver.findElement(birthYearHolderLocator).sendKeys(year + Keys.TAB);
         return this;
     }
+
     /**
      * Функция выбора пола
      * @param sex пол
@@ -252,6 +269,7 @@ public class ForPageObject {
         driver.findElement(sexCheckBoxLocator).click();
         return this;
     }
+
     /**
      * Функция выбора опыта работы
      * @param experienceSkill опыт работы
@@ -262,6 +280,7 @@ public class ForPageObject {
         driver.findElement(chooseJobExperienceOpt).click();
         return this;
     }
+
     /**
      * Функция нажатия кнопки "Сохранить и опубликовать"
      * @return возвращает страницу
@@ -270,6 +289,7 @@ public class ForPageObject {
         driver.findElement(buttonPushLocator).submit();
         return this;
     }
+
     /**
      * Функция нажатия на гиперссылку на форму создания резюме
      * @return возвращает страницу
@@ -278,6 +298,7 @@ public class ForPageObject {
         driver.findElement(makeNewResumeLocator).click();
         return this;
     }
+
     /**
      * Функция создания резюме
      * @param firstName имя
@@ -303,115 +324,6 @@ public class ForPageObject {
         typeBirthdayDateYear(year.toString());
         chooseSex(sex);
         chooseJobExperience(jobExp);
-        waitTime(3);
-        return this;
-    }
-    /**
-     * Функция создания резюме
-     * @param firstName имя
-     * @param lastName фамилия
-     * @param city город
-     * @param day день рождения
-     * @param month месяц рождения
-     * @param year год рождения
-     * @param sex пол
-     * @param jobExp опыт работы
-     * @return возвращает страницу
-     */
-    public ForPageObject doIt(String firstName, String lastName,
-                              String city, String day, String month,
-                              Integer year, String sex, String jobExp) {
-        submitStartMakeResume();
-        typeFirstname(firstName);
-        typeLastname(lastName);
-        waitTime(3);
-        typeCity(city);
-        typeBirthdayDateDay(day);
-        typeBirthdayDateMonth(month);
-        typeBirthdayDateYear(year.toString());
-        chooseSex(sex);
-        chooseJobExperience(jobExp);
-        waitTime(3);
-        return this;
-    }
-    /**
-     * Функция создания резюме
-     * @param firstName имя
-     * @param lastName фамилия
-     * @param city город
-     * @param day день рождения
-     * @param month месяц рождения
-     * @param year год рождения
-     * @param sex пол
-     * @param jobExp опыт работы
-     * @return возвращает страницу
-     */
-    public ForPageObject doIt(String firstName, String lastName,
-                              String city, Integer day, String month,
-                              String year, String sex, String jobExp) {
-        submitStartMakeResume();
-        typeFirstname(firstName);
-        typeLastname(lastName);
-        waitTime(3);
-        typeCity(city);
-        typeBirthdayDateDay((day.toString()));
-        typeBirthdayDateMonth(month);
-        typeBirthdayDateYear(year);
-        chooseSex(sex);
-        chooseJobExperience(jobExp);
-        waitTime(3);
-        return this;
-    }
-    /**
-     * Функция создания резюме без выбора месяца рождения
-     * @param firstName имя
-     * @param lastName фамилия
-     * @param city город
-     * @param day день рождения
-     * @param year год рождения
-     * @param sex пол
-     * @param jobExp опыт работы
-     * @return возвращает страницу
-     */
-    public ForPageObject doIt(String firstName, String lastName,
-                              String city, Integer day,
-                              Integer year, String sex,
-                              String jobExp) {
-        submitStartMakeResume();
-        typeFirstname(firstName);
-        typeLastname(lastName);
-        waitTime(3);
-        typeCity(city);
-        typeBirthdayDateDay((day.toString()));
-        typeBirthdayDateYear(year.toString());
-        chooseSex(sex);
-        chooseJobExperience(jobExp);
-        waitTime(3);
-        return this;
-    }
-    /**
-     * Функция создания резюме без указания опыта работы
-     * @param firstName имя
-     * @param lastName фамилия
-     * @param city город
-     * @param day день рождения
-     * @param month месяц рождения
-     * @param year год рождения
-     * @param sex пол
-     * @return возвращает страницу
-     */
-    public ForPageObject doIt(String firstName, String lastName,
-                              String city, Integer day, String month,
-                              Integer year, String sex) {
-        submitStartMakeResume();
-        typeFirstname(firstName);
-        typeLastname(lastName);
-        waitTime(3);
-        typeCity(city);
-        typeBirthdayDateDay(day.toString());
-        typeBirthdayDateMonth(month);
-        typeBirthdayDateYear(year.toString());
-        chooseSex(sex);
         waitTime(3);
         return this;
     }
@@ -435,6 +347,120 @@ public class ForPageObject {
         typeCity(city);
         typeBirthdayDateDay(day.toString());
         typeBirthdayDateYear(year.toString());
+        waitTime(3);
+        return this;
+    }
+
+    /**
+     * Функция ввода имени при создании резюме
+     * @param firstName имя
+     * @return возвращает страницу
+     */
+    public ForPageObject inputFirstName(String firstName) {
+        submitStartMakeResume();
+        waitTime(8);
+        typeFirstname(firstName);
+        waitTime(3);
+        return this;
+    }
+
+    /**
+     * Функция ввода имени при создании резюме
+     * @param lastName фамилия
+     * @return возвращает страницу
+     */
+    public ForPageObject inputLastName(String lastName) {
+        submitStartMakeResume();
+        waitTime(8);
+        typeLastname(lastName);
+        waitTime(3);
+        return this;
+    }
+
+    /**
+     * Функция ввода города при создании резюме
+     * @param city город
+     * @return возвращает страницу
+     */
+    public ForPageObject inputCity(String city) {
+        submitStartMakeResume();
+        waitTime(8);
+        typeCity(city);
+        waitTime(3);
+        return this;
+    }
+
+    /**
+     * Функция создания резюме без указания опыта работы
+     * @param day день рождения
+     * @param month месяц рождения
+     * @param year год рождения
+     * @return возвращает страницу
+     */
+    public ForPageObject doIt(Integer day, String month, Integer year) {
+        submitStartMakeResume();
+        waitTime(8);
+        typeBirthdayDateDay(day.toString());
+        typeBirthdayDateMonth(month);
+        typeBirthdayDateYear(year.toString());
+        waitTime(3);
+        return this;
+    }
+
+    /**
+     * Функция создания резюме без указания опыта работы
+     * @param day день рождения
+     * @param month месяц рождения
+     * @param year год рождения
+     * @return возвращает страницу
+     */
+    public ForPageObject doIt(String day, String month, Integer year) {
+        submitStartMakeResume();
+        waitTime(8);
+        typeBirthdayDateDay(day.toString());
+        typeBirthdayDateMonth(month);
+        typeBirthdayDateYear(year.toString());
+        waitTime(3);
+        return this;
+    }
+
+
+    /**
+     * Функция создания резюме без указания опыта работы
+     * @param day день рождения
+     * @param month месяц рождения
+     * @param year год рождения
+     * @return возвращает страницу
+     */
+    public ForPageObject doIt(Integer day, String month, String year) {
+        submitStartMakeResume();
+        waitTime(8);
+        typeBirthdayDateDay(day.toString());
+        typeBirthdayDateMonth(month);
+        typeBirthdayDateYear(year.toString());
+        waitTime(3);
+        return this;
+    }
+
+    /**
+     * Функция создания резюме без указания опыта работы
+     * @return возвращает страницу
+     */
+    public ForPageObject doIt() {
+        submitStartMakeResume();
+        waitTime(3);
+        return this;
+    }
+
+    /**
+     * Функция создания резюме без указания опыта работы
+     * @param sex пол
+     * @return возвращает страницу
+     */
+    public ForPageObject selectSex(String sex) {
+        submitStartMakeResume();
+        waitTime(8);
+        chooseSex(sex);
         waitTime(3);
         return this;
     }
