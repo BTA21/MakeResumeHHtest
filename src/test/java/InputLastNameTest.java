@@ -15,31 +15,23 @@ import java.io.IOException;
  * @version 1.2
  */
 public class InputLastNameTest {
-    public By deleteResume = By.xpath("//button[@data-qa='resume-delete']");
-    public By deleteResumeAccept = By.xpath("//button[text()='Удалить']");
     public WebDriver driver;
-    public MakeResume makeResumeNow;
-    public LoginPage loginNow;
-    public int timeForPause;
-    private String myChrDriPath;
+    public ForPageObject makeResumeNow;
 
     @Before
     public void start() throws IOException, ParseException {
-        myChrDriPath = (new File("src\\main\\resources\\chromedriver_win32\\chromedriver.exe").getAbsolutePath());
-        System.setProperty("webdriver.chrome.driver", myChrDriPath);
+        System.setProperty("webdriver.chrome.driver", (new File("src\\main\\resources\\chromedriver_win32\\chromedriver.exe").getAbsolutePath()));
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        loginNow = new LoginPage(driver);
-        loginNow.loginAs();
-        makeResumeNow = new MakeResume(driver);
-        timeForPause = 8;
+        makeResumeNow = new ForPageObject(driver);
+        makeResumeNow.loginAs();
     }
 
     @After
     public void end() {
         try {
-            driver.findElement(deleteResume).click();
-            driver.findElement(deleteResumeAccept).click();
+            driver.findElement(makeResumeNow.deleteResume).click();
+            driver.findElement(makeResumeNow.deleteResumeAccept).click();
         } catch(NoSuchElementException e) {
 
         }
@@ -52,10 +44,8 @@ public class InputLastNameTest {
                                  Integer year, String sex, String jobExp,
                                  Boolean expected) {
         makeResumeNow.doIt(firstName, LastName, city, day, month, year, sex, jobExp);
-        waitTime(timeForPause);
-        Boolean actual = driver.findElements(By.xpath("//div[@class='bloko-control-group__vertical-item' and" +
-                " .//input[@placeholder='Фамилия']]//div[@class='bloko-form-error " +
-                "bloko-form-error_entered' and text()='Только буквы и дефис']")).size() > 0;
+        makeResumeNow.waitTime(makeResumeNow.timeForPause);
+        Boolean actual = driver.findElements(makeResumeNow.onlyABCandDefLastNameErr).size() > 0;
         Assert.assertTrue("Данные оказались корректными.",actual == expected);
     }
 
@@ -71,10 +61,8 @@ public class InputLastNameTest {
                                    Integer year, String sex, String jobExp,
                                    Boolean expected) {
         makeResumeNow.doIt(firstName, LastName, city, day, month, year, sex, jobExp);
-        waitTime(timeForPause);
-        Boolean actual = driver.findElements(By.xpath("//div[@class='bloko-control-group__vertical-item' and" +
-                " .//input[@placeholder='Фамилия']]//div[@class='bloko-form-error " +
-                "bloko-form-error_entered' and text()='Только буквы и дефис']")).size() > 0;
+        makeResumeNow.waitTime(makeResumeNow.timeForPause);
+        Boolean actual = driver.findElements(makeResumeNow.onlyABCandDefLastNameErr).size() > 0;
         Assert.assertTrue("Данные оказались корректными.",actual == expected);
     }
 
@@ -89,10 +77,8 @@ public class InputLastNameTest {
                                        Integer year, String sex, String jobExp,
                                        Boolean expected) {
         makeResumeNow.doIt(firstName, LastName, city, day, month, year, sex, jobExp);
-        waitTime(timeForPause);
-        Boolean actual = driver.findElements(By.xpath("//div[@class='bloko-control-group__vertical-item' and" +
-                " .//input[@placeholder='Фамилия']]//div[@class='bloko-form-error " +
-                "bloko-form-error_entered' and text()='Только буквы и дефис']")).size() > 0;
+        makeResumeNow.waitTime(makeResumeNow.timeForPause);
+        Boolean actual = driver.findElements(makeResumeNow.onlyABCandDefLastNameErr).size() > 0;
         Assert.assertTrue("Данные оказались некорректными.",actual == expected);
     }
 
@@ -108,10 +94,8 @@ public class InputLastNameTest {
                                  Boolean expected) {
         makeResumeNow.doIt(firstName, LastName, city, day, month, year, sex, jobExp);
         makeResumeNow.submitPushResume();
-        waitTime(timeForPause);
-        Boolean actual = driver.findElements(By.xpath("//div[@class='bloko-control-group__vertical-item' and" +
-                " .//input[@placeholder='Фамилия']]//div[@class='bloko-form-error " +
-                "bloko-form-error_entered' and text()='Обязательное поле']")).size() > 0;
+        makeResumeNow.waitTime(makeResumeNow.timeForPause);
+        Boolean actual = driver.findElements(makeResumeNow.necessaryLastNameFieldErr).size() > 0;
         Assert.assertTrue("Данные оказались корректными.",actual == expected);
     }
 
@@ -119,15 +103,4 @@ public class InputLastNameTest {
     public void checkEmptyLNTest() {
         checkEmptyLNStep("Иван", "", "Омск", 21, "09", 1996, "Мужской", "Нет опыта работы",true);
     }
-
-    @Ignore
-    public void waitTime() {
-    }
-    public static void waitTime(Integer sec) {
-        try {
-            Thread.sleep(sec * 1000);
-        } catch (InterruptedException e) {
-        }
-    }
-
 }

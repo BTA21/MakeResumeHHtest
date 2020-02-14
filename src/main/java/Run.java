@@ -25,9 +25,8 @@ public class Run {
         WebDriver driver = new ChromeDriver();
         // Раскрываем браузер на всё окно
         driver.manage().window().maximize();
-        LoginPage loginNow = new LoginPage(driver);
-        MakeResume makeResumeNow = new MakeResume(driver);
-        loginNow.loginAs();
+        ForPageObject makeResumeNow = new ForPageObject(driver);
+        makeResumeNow.loginAs();
         makeResumeNow.doIt("Азмат", "Набиев", "Уфа", 21, "09", 1996, "Мужской", "Нет опыта работы");
         waitTime(10);
         makeResumeNow.submitPushResume();
