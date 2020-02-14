@@ -3,35 +3,31 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.json.simple.parser.ParseException;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import java.io.File;
 import java.io.IOException;
 
 /**
-* Класс для тестирования ввода фамилии при создании резюме со свойствами
-* <b>deleteResume</b>, <b>deleteResumeAccept</b>, <b>driver</b>,
-* <b>makeResumeNow</b>, <b>loginNow</b>,
-* <b>timeForPause</b> и <b>myChrDriPath</b>.
-* @author Набиев Азамат Ильдусович
-* @version 1.2
+ * Класс для тестирования ввода фамилии при создании резюме со свойствами
+ * <b>deleteResume</b>, <b>deleteResumeAccept</b>, <b>driver</b>,
+ * <b>makeResumeNow</b>, <b>loginNow</b>,
+ * <b>timeForPause</b> и <b>myChrDriPath</b>.
+ * @author Набиев Азамат Ильдусович
+ * @version 1.2
  */
-public class InputLastNameTest1 {
+public class InputLastNameTest2 {
     public WebDriver driver;
-    public ForPageObject makeResumeNow;
+    public ForPageObjects makeResumeNow;
 
     @Before
     public void start() throws IOException, ParseException {
         System.setProperty("webdriver.chrome.driver", (new File("src\\main\\resources\\chromedriver_win32\\chromedriver.exe").getAbsolutePath()));
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        makeResumeNow = new ForPageObject(driver);
+        makeResumeNow = new ForPageObjects(driver);
         makeResumeNow.loginAs();
     }
 
@@ -54,15 +50,15 @@ public class InputLastNameTest1 {
         makeResumeNow.doIt(firstName, LastName, city, day, month, year, sex, jobExp);
         makeResumeNow.submitPushResume();
         makeResumeNow.waitTime(makeResumeNow.timeForPause);
-        Boolean actual = driver.findElements(makeResumeNow.necessaryLastNameFieldErr).size() > 0;
-        Assert.assertTrue("Данные оказались корректными.",actual == expected);
+        Boolean actual = driver.findElements(makeResumeNow.onlyABCandDefLastNameErr).size() > 0;
+        Assert.assertTrue("Данные оказались некорректными.",actual == expected);
     }
 
-    @Epic(value = "Тесты на ввод данных при создании резюме")
-    @Feature(value = "Ввод фамилии")
-    @Story(value = "Случаи с ожидаемой ошибкой")
+//    @Epic(value = "Тесты на ввод данных при создании резюме")
+//    @Feature(value = "Ввод фамилии")
+//    @Story(value = "Случаи, где ошибка не ожидается")
     @Test
     public void checkEmptyLNTest() {
-        checkEmptyLNStep("Иван123", "", "Омск", 21, "09", 1996, "Мужской", "Нет опыта работы",true);
+        checkEmptyLNStep("1Иван", "Test-Test", "Омск", 21, "09", 1996, "Мужской", "Нет опыта работы",false);
     }
 }
