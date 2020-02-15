@@ -41,6 +41,9 @@ public class ForPageObject {
     By cityHolderLocator = By.xpath("//input[@data-qa='suggestCity resume-city'" +
             " and @type='text']");
 
+    /** Переменная поля ввода города*/
+    By phoneNumberHolderLocator = By.xpath("//input[@data-qa='resume-phone-cell_phone']");
+
     /** Переменная поля ввода дня рождения*/
     By birthDayHolderLocator = By.xpath("//input[@placeholder='День']");
 
@@ -104,6 +107,9 @@ public class ForPageObject {
     By onlyABCandDefLastNameErr = By.xpath("//div[@class='bloko-control-group__vertical-item' and" +
             " .//input[@placeholder='Фамилия']]//div[@class='bloko-form-error " +
             "bloko-form-error_entered' and text()='Только буквы и дефис']");
+
+    /** Переменная сообщения ошибки "Некорректная дата" */
+    By notCorrectPhoneNumber = By.xpath("//div [@class='bloko-form-error bloko-form-error_entered' and text()= 'Номер указан некорректно']");
 
     /** Переменная сообщения ошибки "Некорректная дата" */
     By notCorrectDate = By.xpath("//div [@class='bloko-form-error bloko-form-error_entered' and text()= 'Некорректная дата']");
@@ -210,6 +216,16 @@ public class ForPageObject {
     public ForPageObject typeLastname(String lastName) {
         driver.findElement(lastNameHolderLocator).clear();
         driver.findElement(lastNameHolderLocator).sendKeys(lastName + Keys.TAB);
+        return this;
+    }
+
+    /**
+     * Функция ввода номера телефона
+     * @param phoneNumber фамилия
+     * @return возвращает страницу
+     */
+    public ForPageObject typePhoneNumber(String phoneNumber) {
+        driver.findElement(phoneNumberHolderLocator).sendKeys(Keys.chord(Keys.CONTROL, "a") + Keys.DELETE + phoneNumber + Keys.TAB);
         return this;
     }
 
@@ -386,6 +402,19 @@ public class ForPageObject {
         submitStartMakeResume();
         waitTime(8);
         typeCity(city);
+        waitTime(3);
+        return this;
+    }
+
+    /**
+     * Функция ввода номера телефона при создании резюме
+     * @param phoneNumber номер телефона
+     * @return возвращает страницу
+     */
+    public ForPageObject inputPhoneNumber(String phoneNumber) {
+        submitStartMakeResume();
+        waitTime(8);
+        typePhoneNumber(phoneNumber);
         waitTime(3);
         return this;
     }

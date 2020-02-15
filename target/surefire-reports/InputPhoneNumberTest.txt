@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: InputSexTest
+Test set: InputPhoneNumberTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 76.545 s - in InputSexTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 284.943 s - in InputPhoneNumberTest
