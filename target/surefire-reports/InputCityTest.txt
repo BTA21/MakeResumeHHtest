@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: InputPhoneNumberTest
+Test set: InputCityTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 326.091 s - in InputPhoneNumberTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 50.689 s - in InputCityTest

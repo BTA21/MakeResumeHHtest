@@ -109,8 +109,8 @@
                 <configuration>
                     <testFailureIgnore>false</testFailureIgnore>
                     <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</argLine>
-                    <parallel>classes</parallel>
-                    <threadCount>2</threadCount>
+                    <parallel>methods</parallel>
+                    <threadCount>4</threadCount>
                     <properties>
                         <property>
                             <name>listener</name>

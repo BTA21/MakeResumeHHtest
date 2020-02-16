@@ -109,7 +109,8 @@ public class ForPageObject {
             "bloko-form-error_entered' and text()='Только буквы и дефис']");
 
     /** Переменная сообщения ошибки "Некорректная дата" */
-    By notCorrectPhoneNumber = By.xpath("//div [@class='bloko-form-error bloko-form-error_entered' and text()= 'Номер указан некорректно']");
+    By notCorrectPhoneNumber = By.xpath("//div[@class='bloko-form-row' and .//input[@placeholder='+7']]" +
+            "//div[@class='bloko-form-error bloko-form-error_entered']");
 
     /** Переменная сообщения ошибки "Некорректная дата" */
     By notCorrectDate = By.xpath("//div [@class='bloko-form-error bloko-form-error_entered' and text()= 'Некорректная дата']");
@@ -327,12 +328,13 @@ public class ForPageObject {
      * @param jobExp опыт работы
      * @return возвращает страницу
      */
-    public ForPageObject doIt(String firstName, String lastName,
+    public ForPageObject doIt(String firstName, String lastName, String phoneNumber,
                               String city, Integer day, String month,
                               Integer year, String sex, String jobExp) {
         submitStartMakeResume();
         typeFirstname(firstName);
         typeLastname(lastName);
+        typePhoneNumber(phoneNumber);
         waitTime(3);
         typeCity(city);
         typeBirthdayDateDay((day.toString()));

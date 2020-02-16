@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="InputPhoneNumberTest" time="326.091" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="InputBirthDateTest" time="142.999" tests="10" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -63,6 +63,14 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="checkPhoneNumberTest1" classname="InputPhoneNumberTest" time="326.091"/>
-  <testcase name="checkPhoneNumberTest2" classname="InputPhoneNumberTest" time="59.211"/>
+  <testcase name="check12DayBDTest" classname="InputBirthDateTest" time="142.999"/>
+  <testcase name="check2006YearBDTest" classname="InputBirthDateTest" time="124.897"/>
+  <testcase name="checkEmptyMonthBDTest" classname="InputBirthDateTest" time="123.608"/>
+  <testcase name="check1899YearBDTest" classname="InputBirthDateTest" time="128.708"/>
+  <testcase name="checkTest12YearBDTest" classname="InputBirthDateTest" time="130.197"/>
+  <testcase name="checkTest12DayBDTest" classname="InputBirthDateTest" time="125.448"/>
+  <testcase name="check123DayBDTest" classname="InputBirthDateTest" time="131.605"/>
+  <testcase name="check12YearBDTest" classname="InputBirthDateTest" time="129.98"/>
+  <testcase name="checkTestYearBDTest" classname="InputBirthDateTest" time="129.207"/>
+  <testcase name="checkTestDayBDTest" classname="InputBirthDateTest" time="127.196"/>
 </testsuite>

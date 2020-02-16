@@ -57,10 +57,32 @@ public class InputPhoneNumberTest {
             { "12", true },
             { "+712", true },
             { "+123456789012", true },
+            { "+1234567890123456789012345", true },
+            { "+1234567890123456789012345678901234567890", true },
     };
 
     @Step("Проверка сценария, где телефонный номер принимает значение '{phoneNumber}'")
-    public void checkPhoneNumberStep(String phoneNumber, Boolean expected) {
+    public void checkFailPhoneNumberStep1(String phoneNumber, Boolean expected) {
+        String message = "Данные оказались корректными.";
+        makeResumeNow.inputPhoneNumber(phoneNumber);
+        makeResumeNow.waitTime(makeResumeNow.timeForPause);
+        makeResumeNow.submitPushResume();
+        Boolean actual = driver.findElements(makeResumeNow.notCorrectPhoneNumber).size() > 0;
+        if (expected == false)
+            message = "Данные оказались некорректными.";
+        Assert.assertTrue(message,actual == expected);
+    }
+//
+    @Epic(value = "Тесты на ввод данных при создании резюме")
+    @Feature(value = "Ввод номера телефона")
+    @Story(value = "Случаи с ожидаемой ошибкой")
+    @Theory
+    public void checkPhoneNumberTest1(final Object... testData) {
+        checkFailPhoneNumberStep1((String) testData[0], (Boolean) testData[1]);
+    }
+
+    @Step("Проверка сценария, где телефонный номер принимает значение '{phoneNumber}'")
+    public void checkValidPhoneNumberStep(String phoneNumber, Boolean expected) {
         String message = "Данные оказались корректными.";
         makeResumeNow.inputPhoneNumber(phoneNumber);
         makeResumeNow.waitTime(makeResumeNow.timeForPause);
@@ -73,15 +95,9 @@ public class InputPhoneNumberTest {
 
     @Epic(value = "Тесты на ввод данных при создании резюме")
     @Feature(value = "Ввод номера телефона")
-    @Story(value = "Случаи с ожидаемой ошибкой")
+    @Story(value = "Случаи, где ошибка не ожидается")
     @Theory
-    public void checkPhoneNumberTest(final Object... testData) {
-        checkPhoneNumberStep((String) testData[0], (Boolean) testData[1]);
-    }
-
-    @Ignore
-    @Test
-    public void checkPhoneNumberTest() {
-        checkPhoneNumberStep("1Тест", true);
+    public void checkPhoneNumberTest2() {
+        checkValidPhoneNumberStep("+12345678901", false );
     }
 }
